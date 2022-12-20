@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <div id="show">
+        </div>
+    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <script>
+        function cl(x) {
+            show(x);
+            console.log(x);
+        }
+
+        function show(msg, divName = "#show") {
+
+            document.querySelector(divName).textContent = msg;
+        }
+
+
+        /*
+        Du ska skapa en quiz-app​
+        Skapa ett git-repo som heter <ditt namn>-testing_typescript-quiz_app​
+        Appen ska följa grundkraven (på föregående slide)​
+        Readme.md fil ska finnas med all information nödvändig för att starta appen
+        Integration ska gå mot Trivia.   ​
+
+        Spelet ska kunna fungera I singelplayer läge​
+
+            */
+
+        // 	Se till att få bort konstiga inställningar fr vs code (ha rätt tillägg kvar)
+
+        // 1 Börja med att använd fetch mot trivia-api:et
+
+        //    https://the-trivia-api.com/api/questions
+
+
+        //let promise = fetch('https://the-trivia-api.com/api/questions')
+
+        // 1 Möjligheten att fylla i sitt player-name​
+        //let name = prompt("Enter player name");
+        let name = "Testnamn";
+        //2 Man startar med att välja en av tre slumpade kategorier.​
+        // https://the-trivia-api.com/api/categories
+
+        // Hämta och slumpa fram tre unika
+
+
+
+function setLanguage(){};
+
+function setDifficulty(){};
+
+
+
+setLanguage();
+setDifficulty();
+showNewQuestion( 1 );
+
+
+function showNewQuestion(questionNumber)
+{
+
+// Show three cats (or skip if error)
+
+// Show question
+
+// Save answer, and points
+
+
+let finished = false;
+let counter = 1;
+
+
+cl("Startar - hämtar kat")
+        let promiseCat = fetch('https://the-trivia-api.com/api/categories')
+        promiseCat
+            .then(response => {
+                console.log(response)
+                let someOtherPromise = response.json()
+                return someOtherPromise
+            })
+            .then(result => {
+
+                    cl("get3cats()");
+                    let randCatArr = get3cats(result);
+                    cl("## " + randCatArr);
+                    prompt("Välj en kategori (skriv 1, 2 eller 3)\n\n" + randCatArr.join("\n"));
+                    cl(catChoice + ": " + randCatArr[catChoice - 1]);
+                    showOneQuestion(randCatArr[catChoice - 1]);
+                }
+            
+                )
+
+
+
+
+function get3cats(result)
+{
+                    // Alla kategorier
+                    console.table(result);
+                    //https://stackoverflow.com/questions/5915096/get-a-random-item-from-a-javascript-array
+                    cl("Slumpar tre kat")
+                    // Fyll array med tre unika kategorier
+                    let randCatArr = [];
+                    while (randCatArr.length < 3) {
+
+                        randCatArr.push(getOneRandomCat(result));
+
+                        //  https://stackoverflow.com/questions/1960473/get-all-unique-values-in-a-javascript-array-remove-duplicates
+                        randCatArr = [...new Set(randCatArr)]
+                    }
+                
+return randCatArr;        
+}
+        //3 Det ska finnas möjlighet att välja svårighetsgrad easy, medium, hard eller random där random väljer svårighetsgrad automatiskt för varje ny fråga.​
+        let difficulty = "medium";
+
+        // 4 Det ska gå att byta region på frågorna mellan engelska och Svenska​
+        let region = "SE";
+
+        // 5 Hittar apiet ingen fråga så ska den försöka igen tills den hittat något.​ Är trivia nere så ska användaren bli notifierad att tjänsten är nere.
+
+        // 6 En spelomgång ska innehålla 9 frågor​
+
+        // 10 När man valt en kategori så dyker nästa fråga upp efter 3 sekunders nedräkning​
+
+    
+        // 7 För varje fråga så har spelarna 30 sekunder på sig att svara
+
+        // 8 ​Poäng sätts med ekvationen:​ Sekunder som är kvar * svårighetsgrad (1 = easy, 3 = medium 5 = hard) + antal gissade rätt * antal gissade I följd om man har minst 3 rätt I följd. ​
+
+        // 9 Vinnaren av varje fråga får välja en av 3 slumpvisa kategorier av nästa fråga​
+
+
+        // 11 När alla 9 frågorna är besvarade så presenteras totalpoäng
+
+        // 12 GitHub, publicera
+        // 13 Gör om med React
+        // 14 Gör om med typescript
+        // 15 Gör om med tester
+        // 16 Lägg till diagram osv.
+        // 17 README - Vilka tester som använts​, teststrategier som använts​, Vart UML-Diagramen finns​, designprinciperna 
+
+
+
+
+        function getOneRandomCat(result) {
+            let ind = Math.floor(Math.random() * 9);
+            cl(ind);
+            // #############################
+            // GE EN KATEGORI:
+            let index2catObj = {}
+            let num = 0;
+            for (let i in result) {
+                index2catObj[num] = result[i][0];
+                num++;
+            }
+            return index2catObj[ind];
+        }
+
+
+        function showOneQuestion(Cat="Music", Reg="SE") {
+
+            cl("¤¤¤¤¤¤¤¤¤¤¤¤");
+            cl("Ska visa en från " + Cat);
+
+
+            let promiseQuestion = fetch('https://the-trivia-api.com/api/questions?categories=' + Cat +'&limit=1&region=' + Reg)
+
+            .then(response => {
+                console.log(response)
+                let someOtherPromise = response.json()
+                return someOtherPromise
+            })
+            .then(result => {
+
+                    // Alla kategorier
+                    console.table(result);
+                    cl(result[0]["question"] + " | 3 "+
+                    result[0]["correctAnswer"] + " - fel: "+
+                    result[0]["incorrectAnswers"]);
+
+                    show("<span>"+result[0]['question']+"<br/>"+"<span onclick='correct()>result[0]['question']" );
+
+                    //treatAnswer();
+
+                }
+            )
+
+            showCurrentResult();
+            // Om nio frågor visats: Visa slutpoäng
+
+            // Visa fråga och alternativ under 30 sekunder
+
+            // Anropar treatAnswer()
+        }
+
+        // Ger rätt eller fel, beräknar eventuellt poäng
+        function treatAnswer() {
+
+            // Vid rätt: välj en av tre kat
+            // Vid fel: en ny slumpas fram
+
+            answerArray.push(prompt("Svarar du rätt?"));
+
+
+        }
+
+        let answerArray = [];
+
+        let promise = fetch('https://the-trivia-api.com/api/questions?categories=film_and_tv&limit=5&region=SE')
+
+        promise
+            .then(response => {
+                console.log(response)
+
+                let someOtherPromise = response.json()
+
+                return someOtherPromise
+            })
+            .then(result => {
+                console.log(result)
+
+                // sätt svårighet och 
+
+                // Det kan jag göra i anrop - eller i 
+
+                // skapa en fråga
+                // Visas efter 3 sek - vadÅ
+
+                //let difficulty = prompt("Välj L (Lätt), M (Medium) eller S (Svår)");
+                //show(name + " " + difficulty);
+
+            })
+
+
+    
+questionNumber++;
+alert("Nu är det dags för " + questionNumber);
+
+
+        }
+
+        //vid svar:
+        //	hitta rätt ny fråga
+        //	beräkna aktuell poäng enligt algoritmen
+
+        //	En spelomgång: 9 frågor
+        //  Vinnaren av varje fråga får välja en av 3 slumpvisa kat
+
+
+
+    </script>
+
+</head>
+
+
+
+</html>
