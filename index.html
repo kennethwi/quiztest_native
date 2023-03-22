@@ -9,151 +9,153 @@
 
     <style rel="stylesheet" href="style.css"></style>
 
-    <script src="https://code.jquery.com/jquery-3.6.2.min.js" integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.2.min.js"
+        integrity="sha256-2krYZKh//PcchRtd+H+VyyQoZ/e3EcrkxhM8ycwASPA=" crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css"
+        integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
 
     <script src="show.js"></script>
 
 
     <style>
         body {
-    margin: 0;
-}
+            margin: 0;
+        }
 
-.vh-15 {
-    min-height: 15vh;
-    padding: 20px;
-}
+        .vh-15 {
+            min-height: 15vh;
+            padding: 20px;
+        }
 
-.vh-70 {
-    min-height: 70vh;
-    padding: 20px;
-}
+        .vh-70 {
+            min-height: 70vh;
+            padding: 20px;
+        }
 
-.vh-60 {
-    min-height: 60vh;
-    padding: 20px;
-    text-align: center;
-}
+        .vh-60 {
+            min-height: 60vh;
+            padding: 20px;
+            text-align: center;
+        }
 
-.vh-30bottom {
-    min-height: 30vh;
-    padding: 20px;
-    text-align: center;
-    background-color: darkslategrey;
-    color: white;
-}
+        .vh-30bottom {
+            min-height: 30vh;
+            padding: 20px;
+            text-align: center;
+            background-color: darkslategrey;
+            color: white;
+        }
 
-.vh-10 {
-    min-height: 10vh;
-    padding: 20px;
-    text-align: center;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-/* for illustration */
+        .vh-10 {
+            min-height: 10vh;
+            padding: 20px;
+            text-align: center;
+            margin-left: 20%;
+            margin-right: 20%;
+        }
 
-.bg-red {
-    background: red;
-}
+        /* for illustration */
 
-.bg-green {
-    background: green;
-}
+        .bg-red {
+            background: red;
+        }
 
-.bg-blue {
-    background: blue;
-}
+        .bg-green {
+            background: green;
+        }
 
-.bg-white {
-    background: white;
-}
+        .bg-blue {
+            background: blue;
+        }
 
-div {
-    color: darkslategray;
-}
+        .bg-white {
+            background: white;
+        }
 
-#show {
-    padding-top: 20px;
-    ;
-    font-size: x-large;
+        div {
+            color: darkslategray;
+        }
 
-  animation-duration: 1s;
-  animation-name: slidein;
-  /* animation-iteration-count: infinite; */
-  animation-direction: alternate;
+        #show {
+            padding-top: 20px;
+            ;
+            font-size: x-large;
 
-  font-family: 'Arial Narrow', Impact, Haettenschweiler,  sans-serif;
+            animation-duration: 1s;
+            animation-name: slidein;
+            /* animation-iteration-count: infinite; */
+            animation-direction: alternate;
 
-}
+            font-family: 'Arial Narrow', Impact, Haettenschweiler, sans-serif;
 
-@keyframes slidein {
-  from {
-    margin-left: 100%;
-    width: 300%;
-  }
+        }
 
-  to {
-    margin-left: 0%;
-    width: 100%;
-  }
-}
+        @keyframes slidein {
+            from {
+                margin-left: 100%;
+                width: 300%;
+            }
 
-#show2 {
-    padding-top: 10px;
-    font-size: 39px;
+            to {
+                margin-left: 0%;
+                width: 100%;
+            }
+        }
 
-
-
-  animation-duration: 1s;
-  animation-name: slidein;
-  /* animation-iteration-count: infinite; */
-  animation-direction: alternate;
-}
-
-.qheader
-{
-    background-color: white;
-    padding:4px;
-    border: 1px black solid;
-}
-
-.space
-{
-    padding-top: 22px;    padding-bottom: 22px;
-    margin-top: 22px;    margin-bottom: 22px;
-}
+        #show2 {
+            padding-top: 10px;
+            font-size: 39px;
 
 
-.bonuspoints
-{
-    color:darkorange;
-}
 
-</style>
+            animation-duration: 1s;
+            animation-name: slidein;
+            /* animation-iteration-count: infinite; */
+            animation-direction: alternate;
+        }
 
-    <body>
-        <div id="cont" style="background-color:gainsboro">
+        .qheader {
+            background-color: white;
+            padding: 4px;
+            border: 1px black solid;
+        }
+
+        .space {
+            padding-top: 22px;
+            padding-bottom: 22px;
+            margin-top: 22px;
+            margin-bottom: 22px;
+        }
 
 
-            <div class='vh-60 bg-grey'>
-                <div id="show"></div>
-            </div>
-            <div class='vh-10 bg-white' id="show2"></div>
-            <div class='vh-30bottom' id="show3"></div>
+        .bonuspoints {
+            color: darkorange;
+        }
+    </style>
 
+<body>
+    <div id="cont" style="background-color:gainsboro">
+        <div class='vh-60 bg-grey'>
+            <div id="show"></div>
         </div>
-    </body>
-    <script src="test.js"></script>
-    <script src="main.obfuscated.js">
+        <div class='vh-10 bg-white' id="show2"></div>
+        <div class='vh-30bottom' id="show3"></div>
 
-    </script>
+    </div>
+</body>
+<script src="test.js"></script>
+<script src="main.obfuscated.js">
+
+</script>
 </head>
 
 </html>

@@ -18,13 +18,9 @@ currentCorrectAnswerIndex = 573254;
 // Array med poäng och bonuspoäng som numbers
 var pointsArrAsNumbers = [];
 
+function getRandomCat() {
 
-
-function getRandomCat()
-{
-
-    return cats[Math.floor(Math.random()*10)];
-
+    return cats[Math.floor(Math.random() * 10)];
 }
 
 showRules();
@@ -49,15 +45,15 @@ function showSettings() {
     }
     console.log("region  " + region);
 
-    difficulty=-1;
+    difficulty = -1;
 
     // DIFFICULTY
     while (!(difficulty in {
-            1: 0,
-            2: 0,
-            3: 0,
-            9: 0
-        })) {
+        1: 0,
+        2: 0,
+        3: 0,
+        9: 0
+    })) {
         difficulty = prompt("Välj svårighetsnivå\n\n1: enkelt\n2: medel\n3: svårt\n9: slumpad nivå för varje fråga")
     }
 
@@ -72,9 +68,9 @@ function showSettings() {
 }
 
 
-function setregion() {};
-function setDifficulty() {};
-function setPlayerName() {};
+function setregion() { };
+function setDifficulty() { };
+function setPlayerName() { };
 
 function showRules() {
     show("Regler för quiz");
@@ -129,27 +125,22 @@ Svårighetsnivån inverkar alltså på poängen för ett korrekt svar.
 
 
 
-function getDifficulty()
-{
-    if(difficulty == 9)
-    {
+function getDifficulty() {
+    if (difficulty == 9) {
         // Ska ge 1, 2 eller 3
-        return Math.floor(Math.random()*3) +1;
-        
+        return Math.floor(Math.random() * 3) + 1;
+
     }
-    else
-    {
+    else {
         return difficulty;
     }
 
 }
 
 
-function showNewQuestion(questionNumber, cat = "EJ SATT", difficulty = difficultyPoints, region) 
-{
+function showNewQuestion(questionNumber, cat = "EJ SATT", difficulty = difficultyPoints, region) {
 
     difficultyPoints = getDifficulty();
-
 
     questionNumber = secondsLeftArr.length;
     questionNumber++;
@@ -158,24 +149,23 @@ function showNewQuestion(questionNumber, cat = "EJ SATT", difficulty = difficult
     console.log("____________________");
 
     if (questionNumber > 9) {
-        show("DIN POÄNG: <p class='qheader'>"  + sumArray(pointsArrAsNumbers) + "</p>")
+        show("DIN POÄNG: <p class='qheader'>" + sumArray(pointsArrAsNumbers) + "</p>")
     } else {
         console.log("showNewQuestion med " + questionNumber);
         hide("#show2");
 
         // Om föregående gav poäng (dvs var rätt)
-        if(secondsLeftArr[secondsLeftArr.length-1]>0)
-            {
+        if (secondsLeftArr[secondsLeftArr.length - 1] > 0) {
             var buttonCode = "<span onclick='showQuestionFromCat(" + questionNumber + ");hide(\"#show\")'><b>Fråga " + questionNumber + "</b></span> | Du svarade rätt! Välj själv nästa kategori<hr /><p>";
             buttonCode += get3UniqueCatsAsButtons() + "</p>"
-            }
-            else // Annars visas en slumpad kategori
-            {
-                cat = getRandomCat();
+        }
+        else // Annars visas en slumpad kategori
+        {
+            cat = getRandomCat();
 
-                buttonCode = "<p class='qheader'>Slumpad kategori</p><button class='btn btn-success btn-lg' onclick='hide(\"#show\");hide(\"#show2\"); showQuestionFromCat(\"" + cat + "\")'>" + cat + "</button> ";
+            buttonCode = "<p class='qheader'>Slumpad kategori</p><button class='btn btn-success btn-lg' onclick='hide(\"#show\");hide(\"#show2\"); showQuestionFromCat(\"" + cat + "\")'>" + cat + "</button> ";
 
-            }
+        }
 
 
         show(buttonCode);
@@ -188,13 +178,12 @@ function showNewQuestion(questionNumber, cat = "EJ SATT", difficulty = difficult
 
 
 // Returns corresponding word 
-function getDifficultyWord()
-    {
-        if(difficultyPoints == 1){ return "easy"}
-        if(difficultyPoints == 2){ return "medium"}
-        if(difficultyPoints == 3){ return "hard"}
+function getDifficultyWord() {
+    if (difficultyPoints == 1) { return "easy" }
+    if (difficultyPoints == 2) { return "medium" }
+    if (difficultyPoints == 3) { return "hard" }
 
-    }
+}
 
 function getQuestionAndAlternatives(categ = 'music', difficulty = 'hard', region = 'se') {
 
@@ -235,11 +224,10 @@ function getQuestionAndAlternatives(categ = 'music', difficulty = 'hard', region
             currentIncorrectAnswers = actualResult.incorrectAnswers;
             currentCorrectAnswer = actualResult.correctAnswer;
 
-            console.log( currentQuestion );
-            console.log( currentIncorrectAnswers );
-            console.log( currentCorrectAnswer  );
+            console.log(currentQuestion);
+            console.log(currentIncorrectAnswers);
+            console.log(currentCorrectAnswer);
             return "KLAR"
-
         })
 }
 
@@ -249,7 +237,7 @@ var latestCall = "";
 
 function showQuestionFromCat(selectedCat) {
 
-cl("showQuestionFromCat" + selectedCat);
+    cl("showQuestionFromCat" + selectedCat);
 
     clearInterval(interval3);
 
@@ -257,36 +245,34 @@ cl("showQuestionFromCat" + selectedCat);
     let urlcat = cat.replace(/ /g, "_");
     urlcat2 = urlcat.replace(/&/g, "and");
 
-        latestCall = questionNumber;
-        getQuestionAndAlternatives(urlcat2);
+    latestCall = questionNumber;
+    getQuestionAndAlternatives(urlcat2);
 
-        console.log("######  showQuestionFromCat " + questionNumber + " " + selectedCat.toLowerCase());
-        let secondsLeftofThree = 3;
+    console.log("######  showQuestionFromCat " + questionNumber + " " + selectedCat.toLowerCase());
+    let secondsLeftofThree = 3;
 
-        interval3 = setInterval(() => {
-            secondsLeftofThree--;
+    interval3 = setInterval(() => {
+        secondsLeftofThree--;
 
-            if (secondsLeftofThree <= 0) {
-                clearInterval(interval3);
-                actualDisplayOfQuestion(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer);
-            }
-            show2(" " + secondsLeftofThree);
-            // IF TIME RUNS OUT
-        }, 1000);
+        if (secondsLeftofThree <= 0) {
+            clearInterval(interval3);
+            actualDisplayOfQuestion(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer);
+        }
+        show2(" " + secondsLeftofThree);
+        // IF TIME RUNS OUT
+    }, 1000);
 
-    
 }
 
 
 
 
-function actualDisplayOfQuestion(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer) 
-{
+function actualDisplayOfQuestion(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer) {
     // VISA FRÅGA FRÅN VALD KATEGORI, SVÅRIGHETSNIVÅ, SPRÅK
     secondsLeft = 30;
     show2(secondsLeft);
 
-    showQuestionAndAlternatives(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer) ;
+    showQuestionAndAlternatives(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer);
     interval30 = setInterval(() => {
         secondsLeft--;
         show2(secondsLeft);
@@ -294,9 +280,9 @@ function actualDisplayOfQuestion(questionNumber, selectedCat, currentQuestion, c
         // IF TIME RUNS OUT
         if (secondsLeft <= 0) {
             clearInterval(interval30);
-            treatA(questionNumber, false, 0);
+            treatAnswer(questionNumber, false, 0);
         } else {
-                // HÄR: VISA FRÅGA MED ALTERANATIV
+            // HÄR: VISA FRÅGA MED ALTERANATIV
 
         }
 
@@ -305,78 +291,71 @@ function actualDisplayOfQuestion(questionNumber, selectedCat, currentQuestion, c
 }
 
 
-function showQuestionAndAlternatives(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer) 
-{
+function showQuestionAndAlternatives(questionNumber, selectedCat, currentQuestion, currentIncorrectAnswers, currentCorrectAnswer) {
 
     //var strArr = [ currentQuestion + "</p>"];
 
     altArr = [];
     // INSERT CORRECT ALT AT RANDOM POSITION
-    let random0to2 = Math.floor(Math.random()*3);
+    let random0to2 = Math.floor(Math.random() * 3);
     currentCorrectAnswerIndex = random0to2;
 
-    for(let i=0,j=0; i<4; i++)
-        {
-            if( i == random0to2)
-            {
-                altArr.push(currentCorrectAnswer);
-            }
-            else
-            {
-                altArr.push(currentIncorrectAnswers[ j ]);
-                j++;
-            }
+    for (let i = 0, j = 0; i < 4; i++) {
+        if (i == random0to2) {
+            altArr.push(currentCorrectAnswer);
         }
+        else {
+            altArr.push(currentIncorrectAnswers[j]);
+            j++;
+        }
+    }
 
-        // SKAPA ALT-KNAPPAR OCH FRÅGA ATT VISA
-        let outArr = ["<p class='qheader space'> " + questionNumber + " " + selectedCat +   " (" + getDifficultyWord() + ")</p><p class='space'>" +currentQuestion + "<hr class='space' />"];
-        for(let i=0; i<4; i++)
-            {
-                outArr.push("<button class='btn btn-primary btn-lg' onclick='treatA("+ i +")'>" + altArr[ i ] + "</button>")
-            }
-        //alert(altArr.join("\n"));
-        show(outArr.join(" "));
+    // SKAPA ALT-KNAPPAR OCH FRÅGA ATT VISA
+    let outArr = ["<p class='qheader space'> " + questionNumber + " " + selectedCat + " (" + getDifficultyWord() + ")</p><p class='space'>" + currentQuestion + "<hr class='space' />"];
+    for (let i = 0; i < 4; i++) {
+        outArr.push("<button class='btn btn-primary btn-lg' onclick='treatA(" + i + ")'>" + altArr[i] + "</button>")
+    }
+    //alert(altArr.join("\n"));
+    show(outArr.join(" "));
 
-//
-//show("<span onclick='clearInterval(interval30);treatA(" + questionNumber + "," + checkCorrect() + "," + secondsLeft + ")'><b>Visar fråga (" + questionNumber + ") för vald kategori: "+ selectedCat +"</b></span> (klicka för att svara)<p><span onclick='clearInterval(interval30);treatA(" + questionNumber + ",false,0 )'><b>SVARA FEL</b></span></p>");
+    //
+    //show("<span onclick='clearInterval(interval30);treatA(" + questionNumber + "," + checkCorrect() + "," + secondsLeft + ")'><b>Visar fråga (" + questionNumber + ") för vald kategori: "+ selectedCat +"</b></span> (klicka för att svara)<p><span onclick='clearInterval(interval30);treatA(" + questionNumber + ",false,0 )'><b>SVARA FEL</b></span></p>");
 
-}       
+}
 
 // TREATS POINTS AFTER AN ANSWER
-function treatA(selectedAlt) {
+function treatAnswer(selectedAlt) {
     clearInterval(interval30);
 
 
-console.log("questionNumber  selectedAlt   currentCorrectAnswerIndex  secondsLeft");
-console.log(questionNumber +" "+selectedAlt +" "+ currentCorrectAnswerIndex +" "+ secondsLeft);
+    console.log("questionNumber  selectedAlt   currentCorrectAnswerIndex  secondsLeft");
+    console.log(questionNumber + " " + selectedAlt + " " + currentCorrectAnswerIndex + " " + secondsLeft);
 
-if(selectedAlt == currentCorrectAnswerIndex){isCorrect=true}else{isCorrect=false; secondsLeft=0};
+    if (selectedAlt == currentCorrectAnswerIndex) { isCorrect = true } else { isCorrect = false; secondsLeft = 0 };
 
-if(isCorrect)
-{
-secondsLeftArr.push(secondsLeft);
-}
-else
-{
-secondsLeftArr.push(0);
-}
+    if (isCorrect) {
+        secondsLeftArr.push(secondsLeft);
+    }
+    else {
+        secondsLeftArr.push(0);
+    }
 
 
-show3add(questionNumber + " - Rätt svar?: " + isCorrect + " Tid kvar: " + secondsLeft + " | Poäng: " + getPointsForCurrentQuestion());
-
-
-
-
-/*
-    console.log("LÄGGER TILL " + secondsLeft + "i arrayen")
-    secondsLeftArr.push(secondsLeft);
-
-    console.log("#######treatA ");
-    console.table(arguments);
-
-    console.log("secondsLeftArr: " + secondsLeftArr);
     show3add(questionNumber + " - Rätt svar?: " + isCorrect + " Tid kvar: " + secondsLeft + " | Poäng: " + getPointsForCurrentQuestion());
-*/
+
+
+
+
+    /*
+        console.log("LÄGGER TILL " + secondsLeft + "i arrayen")
+        secondsLeftArr.push(secondsLeft);
+    
+        console.log("#######treatA ");
+        console.table(arguments);
+    
+        console.log("secondsLeftArr: " + secondsLeftArr);
+        show3add(questionNumber + " - Rätt svar?: " + isCorrect + " Tid kvar: " + secondsLeft + " | Poäng: " + getPointsForCurrentQuestion());
+    */
 
 
     if (questionNumber < 10) {
@@ -388,14 +367,13 @@ show3add(questionNumber + " - Rätt svar?: " + isCorrect + " Tid kvar: " + secon
 }
 
 
-function getPointsForCurrentQuestion() 
-{
+function getPointsForCurrentQuestion() {
 
-    cl("*w*" + secondsLeft);            cl("*ww*" + difficultyPoints);
+    cl("*w*" + secondsLeft); cl("*ww*" + difficultyPoints);
     let pointsA = secondsLeft * difficultyPoints;
-    let pointsMsg = secondsLeft * difficultyPoints + " (" + secondsLeft + "*" + difficultyPoints +")";
+    let pointsMsg = secondsLeft * difficultyPoints + " (" + secondsLeft + "*" + difficultyPoints + ")";
 
-cl("**" + pointsA);
+    cl("**" + pointsA);
 
     let bonusPoints = getBonusPoints(secondsLeftArr.length - 1);
     console.log("bonusPoints |||||||| " + bonusPoints);
@@ -421,13 +399,11 @@ cl("**" + pointsA);
 
 }
 
-function sumArray(arr)
-{
-    let sum=0;
-    for(let i=0; i<arr.length; i++)
-        {
-            sum+=arr[ i ];
-        }
+function sumArray(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
     return sum;
 }
 
@@ -499,7 +475,7 @@ function get3UniqueCatsAsButtons() {
         temparr = [...new Set(temparr)];
     }
 
-    
+
 
     console.log(temparr);
     // Fyll med kategorinamn istället för index
@@ -512,7 +488,7 @@ function get3UniqueCatsAsButtons() {
 function buttonsFromCatArr(catArr, numArr) {
     console.log("buttonsFromCatArr " + catArr);
 
-    
+
 
     var outStr = "<button class='btn  btn-lg btn-success' onclick='hide(\"#show\");hide(\"#show2\"); showQuestionFromCat(\"" + catArr[0] + "\")'>" + catArr[0] + "</button> ";
     outStr += " <button class='btn  btn-lg btn-success' onclick='hide(\"#show\");hide(\"#show2\");   showQuestionFromCat(\"" + catArr[1] + "\")'>" + catArr[1] + "</button> "
